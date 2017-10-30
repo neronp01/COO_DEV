@@ -1,0 +1,23 @@
+.md_card_login{
+  width: 500px;
+  height: 700px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.button-derection{
+  margin: 10px;
+}
+.content-info-perso{
+  margin-top: 100px;
+}
+.footer{
+  margin-top: 65px;
+}

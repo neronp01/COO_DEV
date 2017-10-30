@@ -1,0 +1,34 @@
+.md_card_login{
+  width: 400px;
+  height: 700px;
+}
+
+.grid_list_login{
+  margin-top: 50px;
+}
+
+.login-titre{
+  font-family: "Times New Roman", Times, serif;
+  color:#546E7A;
+}
+
+.image-providers{
+  float: right;
+}
+.login-text-button{
+  float: left;
+  font-family: "Times New Roman", Times, serif;
+}
+.list-item-button{
+  height: 85px;
+}
+
+
+.login-button{
+  height:75px;
+}
+
+.login-jouindre-button{
+  font-family: "Times New Roman", Times, serif;
+  color:#546E7A;
+}

@@ -1,0 +1,28 @@
+.md_card_login{
+  width: 800px;
+  height: 700px;
+}
+mat-list{
+
+}
+.list_titre{
+  position: absolute;
+  left: 0px;
+}
+p{
+  font-size: small;
+
+}
+.option {
+
+}
+
+.card_inf{
+  width: 325px;
+  height: 100px;
+}
+.paiement{
+  background-color: #546E7A;
+  width: 300px;
+  height: 300px;
+}
