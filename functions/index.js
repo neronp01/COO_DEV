@@ -1,8 +1,11 @@
 
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const sendgrid = require('sendgrid');
-const client = sendgrid("asGhMWa_TgahMiZuC3DRKg");
+const sendgrid = require('@sendgrid/mail');
+sendgrid.setApiKey("asGhMWa_TgahMiZuC3DRKg");
+
+
+
 
 admin.initializeApp(functions.config().firebase);
 
@@ -53,32 +56,23 @@ function parseBody(body) {
   var mail = new helper.Mail(fromEmail, subject, toEmail, content);
   return  mail.toJSON();
 }
-exports.httpEmail = functions.https.onRequest((req, res) => {
-  return Promise.resolve()
-    .then(() => {
-      if (req.method !== 'POST') {
-        const error = new Error('Only POST requests are accepted');
-        error.code = 405;
-        throw error;
-      }
-      const request = client.emptyRequest({
-        method: 'POST',
-        path: '/v3/mail/send',
-        body: parseBody(req.body)
-      });
-      return client.API(request)
-    })
-    .then((response) => {
-      if (response.body) {
-        res.send(response.body);
-      } else {
-        res.end();
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      return Promise.reject(err);
-    });
+
+exports.MyFunction = functions.https.onRequest((req, res) => {
+  res.send('my function');
 });
+exports.httpEmail = functions.https.onRequest((req, res) => {
+  if (req.method !== 'POST') {
+    const error = new Error('Only POST requests are accepted');
+    error.code = 405;
+    throw error;
+  }
+  sendgrid.send({
+    to:"neronpascal001@gmail.com",
+    from:"neronpascal001@gmail.com",
+    subject:"test",
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>'
+  });
+  res.send("testFini");
 
-
+});

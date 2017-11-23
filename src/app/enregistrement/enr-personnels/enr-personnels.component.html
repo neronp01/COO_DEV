@@ -1,16 +1,20 @@
-<mat-grid-list cols="1" rowHeight="800px" class="grid_list_login">
+<mat-grid-list cols="1" rowHeight="800px" class="grid_list_login" *ngIf="etat !== 'overviewEdit'" >
   <!--<form>-->
-
   <mat-grid-tile colspan="1" class="title">
-    <mat-card class="md_card_login">
+    <mat-card class="md_card_login" [@flyInOut]="state">
       <form [formGroup]="membreForm" novalidate>
-      <mat-card-title>
-        <h4 class="display-4">Informations personnelles</h4>
+      <mat-card-title class="card_titre">
+        <h4>Renseignements personnels</h4>
+        <p class="champObli">* champ obligatoire</p>
       </mat-card-title>
       <mat-card-content class="content-info-perso">
-
-        <mat-grid-list cols="4" rowHeight="60px">
-            <mat-grid-tile colspan = "2" rowspan="2" class="un">
+        <mat-grid-list cols="4" rowHeight="70px">
+          <mat-grid-tile colspan = "4" rowspan="2" class="informationSaisies">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Courriel" disabled [value]="courriel">
+            </mat-form-field>
+          </mat-grid-tile>
+            <mat-grid-tile colspan = "4" rowspan="1" class="un">
                 <mat-form-field class="example-full-width">
                   <mat-select placeholder="Type de cotisations" [(ngModel)]="selectedValue" name="inscription"   formControlName="typeCotisationForm"  required>
                     <mat-option *ngFor="let cotisation of cotisations"
@@ -19,19 +23,8 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-                <!--<mat-slide-toggle-->
-                  <!--#abonnementFam-->
-                  <!--[checked]="tabInf['abonnementFam']"-->
-                  <!--[disabled]="disabled"-->
-                  <!--(change)="abonnementType($event)">-->
-                 <!--<h4 class="display-4">{{_abonnementType}}</h4>-->
-                <!--</mat-slide-toggle>-->
             </mat-grid-tile>
-          <mat-grid-tile colspan = "4" rowspan="1" class="informationSaisies">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Courriel" disabled [value]="courriel">
-            </mat-form-field>
-          </mat-grid-tile>
+
 
             <mat-grid-tile colspan = "2" rowspan="1" class="un">
              <mat-form-field class="example-full-width">
@@ -96,6 +89,7 @@
                 [placeholder]="placeholder"
                 [tabInf]="tabInf"
                 [value]="value"
+                required
                 (telephone)="telephone($event)"
                 ></my-tel-input>
                 <!--<input matInput-->
@@ -138,14 +132,146 @@
     <button mat-mini-fab
             type="submit"
             [disabled] = isDisabled
-            color="primary" class="btn-success" (click)="next( prenom.value,nom.value,adresse.value,codePostal.value,ville.value, profession.value , dateNaissance.value)" ><i class="material-icons">chevron_right</i></button>
+            style="background-color: #83b748" class="btn-success" (click)="next( prenom.value,nom.value,adresse.value,codePostal.value,ville.value, profession.value , dateNaissance.value)" ><i style="color: #ffffff" class="material-icons">chevron_right</i></button>
       </mat-grid-tile>
 </mat-grid-list>
-            <h5 class="mat-h5" style="float: right; padding-right: 20px">{{_page}}</h5>
+            <h5 class="mat-h5" style="float: right; padding-right: 20px"></h5>
         </mat-card-footer>
   </form>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
 
+<mat-grid-list cols="1" rowHeight="550px" class="grid_list_login" *ngIf="etat === 'overviewEdit'" style="width: 600px; margin-top: 20px;">
+  <!--<form>-->
+  <mat-grid-tile colspan="1" class="title">
+<div class="md_card_login2">
+      <form [formGroup]="membreForm" novalidate>
+          <h2 style="color:#673AB7">Modification des renseignements</h2>
+          <!--<p class="champObli">* champ obligatoire</p>-->
+          <mat-grid-list cols="4" rowHeight="70px">
+            <!--<mat-grid-tile colspan = "4" rowspan="1" class="un">-->
+              <!--<mat-form-field class="example-full-width">-->
+                <!--<mat-select placeholder="Type de cotisations" [(ngModel)]="selectedValue" name="inscription"   formControlName="typeCotisationForm"  required>-->
+                  <!--<mat-option *ngFor="let cotisation of cotisations"-->
+                              <!--[value]="cotisation.value">-->
+                    <!--{{cotisation.viewValue}}-->
+                  <!--</mat-option>-->
+                <!--</mat-select>-->
+              <!--</mat-form-field>-->
+            <!--</mat-grid-tile>-->
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput id="prenom"
+                       formControlName="prenomForm"
+                       class="form-control"
+                       minlength="2"
+                       required
+                       #prenom
+                       placeholder="Prénom" >
+                <mat-error>Ce champs est obligatoire</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput
+                       formControlName="nomForm"
+                       class="form-control"
+                       minlength="2"
+                       required
+                       placeholder="Nom" #nom >
+                <mat-error>Ce champs est obligatoire</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "4" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput
+                       formControlName="adresseForm"
+                       class="form-control"
+                       minlength="4"
+                       required
+                       placeholder="Adresse" #adresse >
+                <mat-error>Ce champs est obligatoire</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput
+                       placeholder="Ville"
+                       formControlName="villeForm"
+                       class="form-control"
+                       minlength="3"
+                       required
+                       #ville>
+                <mat-error>Ce champs est obligatoire</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput
+                       formControlName="codePostalForm"
+                       class="form-control"
+                       minlength="6"
+                       required
+                       placeholder="Code Postal" #codePostal >
+                <mat-error>Ce champs est obligatoire</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <my-tel-input
+                  [placeholder]="placeholder"
+                  [tabInf]="tabInf"
+                  [value]="value"
+                  required
+                  (telephone)="telephone($event)"
+                ></my-tel-input>
+                <!--<input matInput-->
+                <!--formControlName="telephoneForm"-->
+                <!--class="form-control"-->
+                <!--type="tel" placeholder="Téléphone" #telephone >-->
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
+              <mat-form-field class="example-full-width">
+                <input matInput
+                       formControlName="professionForm"
+                       class="form-control"
+                       placeholder="Profession" #profession>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan = "2" rowspan="1" class="un">
 
+              <mat-form-field class="example-full-width">
+                <form #myForm="ngForm" novalidate>
+                  <input matInput
+                         type="text"
+                         name="dateNaissance"
+                         #dateNaissance="ngModel"
+
+                         [(ngModel)]="_dateNaissance"
+                         class="form-control"
+                         placeholder="Date de naisssance"
+                         dateNaissanceValidation
+                  >
+                  <app-errors [control]="dateNaissance"></app-errors>
+                </form>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        <mat-card-footer>
+          <mat-grid-list cols="3" rowHeight="50px" class="footer">
+            <mat-grid-tile colspan="3" >
+              <button mat-raised-button
+                      color="primary"
+                      type="submit"
+                      [disabled] = isDisabled
+                      class="btn-success" (click)="next( prenom.value,nom.value,adresse.value,codePostal.value,ville.value, profession.value , dateNaissance.value)" >Sauver</button>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <h5 class="mat-h5" style="float: right; padding-right: 20px"></h5>
+        </mat-card-footer>
+      </form>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -3,13 +3,11 @@
     <mat-card class="md_card_login">
       <form [formGroup]="membreForm" novalidate>
       <mat-card-title>
-        <h4 class="display-4">Informations personnelles</h4>
+        <h4 class="display-4">Informations personnelles conjouint(e)</h4>
+        <p class="champObli">* champ obligatoire</p>
       </mat-card-title>
-      <mat-card-subtitle>
-        Conjouint(e)
-      </mat-card-subtitle>
       <mat-card-content class="content-info-perso">
-        <mat-grid-list cols="4" rowHeight="60px">
+        <mat-grid-list cols="4" rowHeight="70px">
           <!--<form class="example-form">-->
 
             <mat-grid-tile colspan = "4" rowspan="1" class="un">
@@ -83,7 +81,7 @@
               </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile colspan = "4" rowspan="2" class="un">
+            <mat-grid-tile colspan = "4" rowspan="1" class="un">
             </mat-grid-tile>
 
           <!--</form>-->
@@ -91,15 +89,15 @@
       </mat-card-content>
       <mat-card-footer class="footer">
         <mat-grid-list cols="3" rowHeight="50px">
-          <mat-grid-tile colspan="3">
-            <button mat-mini-fab color="primary" (click)="gauche( courriel.value, nom.value, prenom.value, profession.value, dateNaissance.value)" class="button-derection"><i class="material-icons">chevron_left</i></button>
-            <button mat-mini-fab color="primary"
+          <mat-grid-tile colspan="3" class="tile_button">
+            <button mat-mini-fab  class="button_bottom" (click)="gauche( courriel.value, nom.value, prenom.value, profession.value, dateNaissance.value)"><i style="color: #ffffff"  class="material-icons">chevron_left</i></button>
+            <button mat-mini-fab  class="button_bottom"
                     type="submit"
                     [disabled] = isDisabled
-                    (click)="droite( courriel.value, nom.value, prenom.value, profession.value, dateNaissance.value)"><i class="material-icons">chevron_right</i></button>
+                    (click)="droite( courriel.value, nom.value, prenom.value, profession.value, dateNaissance.value)"><i style="color: #ffffff" class="material-icons">chevron_right</i></button>
           </mat-grid-tile>
         </mat-grid-list>
-        <h5 class="mat-h5" style="float: right; padding-right: 20px">{{_page}}</h5>
+        <h5 class="mat-h5" style="float: right; padding-right: 20px"></h5>
 
       </mat-card-footer>
       </form>

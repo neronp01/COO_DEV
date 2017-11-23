@@ -1,0 +1,10 @@
+
+<mat-card class="card_message">
+  <mat-card-header>
+    <h2>Administrateur</h2>
+  </mat-card-header>
+
+  <mat-card-content>
+<app-liste [etat]="etat" (edit) = "adminEditMemb($event) "></app-liste>
+  </mat-card-content>
+</mat-card>

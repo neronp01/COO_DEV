@@ -7,7 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule , MatCheckboxModule, MatCardModule, MatGridListModule,
   MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSlideToggleModule,
-  MatListModule , MatTabsModule, MatSelectModule} from '@angular/material';
+  MatListModule , MatTabsModule, MatSelectModule, MatTableModule,
+  MatExpansionModule, MatToolbarModule, MatTooltipModule, MatDialogModule} from '@angular/material';
 import { AuthService } from './services/auth-service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 import { ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 
 
 import { AppComponent } from './app.component';
@@ -36,6 +38,10 @@ import { PaymentModule } from './payments/payment/payment.module';
 import { MakePaymentComponent } from './payments/make-payment/make-payment.component';
 import { PaymentService } from './payments/payment/payment.service';
 import { SendEmailComponent } from './send-email/send-email.component';
+import { HomeComponent, DialogOverviewExampleDialog } from './home/home.component';
+import { ListeComponent } from './home/liste/liste.component';
+import { EmailComponent } from './home/email/email.component';
+import { AdministrateurComponent, DialogAdmin } from './home/administrateur/administrateur.component';
 
 
 
@@ -54,7 +60,14 @@ import { SendEmailComponent } from './send-email/send-email.component';
     DateNaissanceValidationDirective,
     ErrorsComponent,
     MakePaymentComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    HomeComponent,
+    ListeComponent,
+    EmailComponent,
+    DialogOverviewExampleDialog,
+    AdministrateurComponent,
+    DialogAdmin
+
 
   ],
   imports: [
@@ -69,13 +82,17 @@ import { SendEmailComponent } from './send-email/send-email.component';
     FormsModule,
     HttpModule,
     BrowserModule, BrowserAnimationsModule, NoopAnimationsModule, MatButtonModule, MatCheckboxModule, MatCardModule, MatGridListModule,
-    MatListModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSlideToggleModule, MatListModule, MatSelectModule
+    MatListModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSlideToggleModule, MatListModule, MatSelectModule,
+    MatTabsModule, MatTableModule, MatToolbarModule, MatExpansionModule, MatTooltipModule, MatDialogModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-CA' },
     { provide: DateAdapter, useClass: MyDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, PaymentService
     ],
+  entryComponents: [
+    DialogOverviewExampleDialog, DialogAdmin
+  ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

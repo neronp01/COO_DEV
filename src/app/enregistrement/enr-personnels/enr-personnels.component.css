@@ -1,6 +1,10 @@
 .md_card_login{
   width: 500px;
-  height: 700px;
+  height: auto;
+}
+.md_card_login2{
+  width: 450px;
+  height: auto;
 }
 .example-form {
   min-width: 150px;
@@ -16,4 +20,19 @@
 }
 .footer{
   margin-top: 60px;
+}
+.champObli{
+  font-size: small ;
+  color: red;
+  position: relative;
+  bottom: 25px;
+  left: 20px;
+}
+
+.content-info-perso{
+  font-size: medium ;
+}
+.card_titre{
+  position:relative;
+  top:30px;
 }

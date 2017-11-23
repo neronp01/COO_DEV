@@ -150,6 +150,14 @@ membreUpdateInfPerso(prenom: string, nom: string , adresse: string , codePostal:
     const upMembre = { courrielConjouint: courriel}
     return upMembre;
   }
+
+
+  get listeMembre(): Observable<Membre[]> {
+    let membre = new Observable<Membre[]>();
+    this.membresCollection = this.dbc.collection('membres');
+    this.membres = this.membresCollection.valueChanges();
+    return membre = this.membres;
+  }
  get infoMembre(): Observable<Membre[]> {
     let membre = new Observable<Membre[]>();
     this.membresCollection = this.dbc.collection('membres', ref => {
@@ -208,7 +216,7 @@ test2(s: string ){
       return ref.where('data.courrielConjouint', '==', courriel)
     });
     tabmembre =  this.membresCollection.valueChanges();
-    console.log('check',courriel, tabmembre);
+    console.log('check', courriel , tabmembre);
     return tabmembre;
   }
   trouverUidConj(courriel: string): AngularFirestoreCollection<Membre> {

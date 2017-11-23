@@ -2,9 +2,9 @@
   <mat-grid-tile colspan="1" class="title">
     <mat-card class="md_card_login">
       <mat-card-title>
-        <h4 class="display-4">Informations complémentaires</h4>
+        <h4 class="display-4">Renseignements complémentaires</h4>
       </mat-card-title>
-      <mat-card-subtitle>Implications dans le Club</mat-card-subtitle>
+      <!--<mat-card-subtitle>Participations dans le Club</mat-card-subtitle>-->
       <mat-card-content class="content-info-perso">
         <mat-list class="slide-toogle-list">
           <mat-list-item>
@@ -34,6 +34,7 @@
             </div>
             </mat-list-item>
         </mat-list>
+        <p>Je suis disponible pour :</p>
         <mat-grid-list class="option" cols="2" rowHeight="60px">
           <mat-grid-tile colspan="1" rowspan="3">
           <mat-list>
@@ -68,7 +69,6 @@
               <mat-list-item>
                 <mat-checkbox
                   #consAdm
-
                   [checked]="infoMembre['consAdm']"
                   class="example-margin">
                   Conseil d’administration
@@ -94,21 +94,19 @@
           </mat-grid-tile>
           <mat-grid-tile colspan="2" rowspan="1">
             <mat-form-field class="example-full-width">
-            <input #autre   matInput placeholder="Autre:"
+            <input #autre   matInput placeholder="Autre :"
                    [value]="infoMembre['autre']">
           </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
-
-
       </mat-card-content>
       <mat-card-footer>
         <mat-grid-list class="footerButton" cols="3" rowHeight="50px">
           <mat-grid-tile colspan="3">
-            <button Class="button-derection" mat-mini-fab color="primary" (click)="gauche( teleListe.checked, nomListe.checked, animExc.checked,recenNoel.checked,animKio.checked,
+            <button style="background-color: #83b748"  Class="button-derection" mat-mini-fab color="primary" (click)="gauche( teleListe.checked, nomListe.checked, animExc.checked,recenNoel.checked,animKio.checked,
                     consAdm.checked,redacRevi.checked,promoPubli.checked,autre.value)" class="button-derection">
                     <i class="material-icons">chevron_left</i></button>
-            <button class="button-derection" mat-mini-fab color="primary" (click)="facture( teleListe.checked, nomListe.checked, animExc.checked,recenNoel.checked,animKio.checked,
+            <button style="background-color: #83b748"  class="button-derection" mat-mini-fab color="primary" (click)="facture( teleListe.checked, nomListe.checked, animExc.checked,recenNoel.checked,animKio.checked,
                     consAdm.checked,redacRevi.checked,promoPubli.checked,autre.value)" class="button-derection">
               <i class="material-icons">attach_money</i></button>
           </mat-grid-tile>

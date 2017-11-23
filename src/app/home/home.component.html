@@ -1,0 +1,108 @@
+<mat-toolbar color="primary" style="height: 100px">
+  <span><img class="google" src="./assets/titre.png" style="transform: translate(-600px,50px)  scale(0.3)"/></span>
+</mat-toolbar>
+  <mat-tab-group color="primary"  (selectedTabChange)="selectedTab($event)" backgroundColor="primary" style="min-height: 700px">
+    <mat-tab label="Aperçu" >
+     <mat-card class="container">
+       <mat-card-header>
+         <h2>Informations personnelles</h2>
+       </mat-card-header>
+       <mat-card-content>
+         <mat-grid-list cols="6" rowHeight="30px">
+           <mat-grid-tile colspan="3" rowspan="15">
+             <mat-card class="infoPersoCard">
+             <mat-list>
+               <mat-list-item>
+                 <span>  <h3 align="left" >Inforations personnelles</h3></span>
+                 <span class="example-spacer"></span>
+                 <div class="example-tooltip-host" matTooltip="Rééditer vos information personnelles" [matTooltipPosition]="position">
+                 <button mat-mini-fab color="primary" class="toolbar_menu_button" (click)="openDialog()"> <i class="material-icons">mode_edit</i></button>
+                 </div>
+               </mat-list-item>
+<mat-list-item>
+             <p class="content-info-perso" style="margin-left: 20px">Nom: &nbsp; {{ nom }}</p>
+</mat-list-item>
+               <mat-list-item>
+             <p class="content-info-perso" style="margin-left: 20px">Adresse:  &nbsp; {{adresse}}</p>
+
+               </mat-list-item>
+               <mat-list-item>
+             <p class="content-info-perso" style="margin-left: 20px">Téléphone:  &nbsp;{{telephone}}</p>
+               </mat-list-item>
+               <mat-list-item>
+             <p class="content-info-perso" *ngIf="profession!==null || profession!==''" style="margin-left: 20px">Profession:  &nbsp;{{profession}}</p>
+
+            </mat-list-item>
+               <mat-list-item>
+             <p class="content-info-perso"  *ngIf="dateNaissance!==null" style="margin-left: 20px">Date de naissance:  &nbsp;{{dateNaissance}}</p>
+               </mat-list-item>
+             </mat-list>
+             </mat-card>
+
+           </mat-grid-tile>
+           <mat-grid-tile colspan="3" rowspan="15"></mat-grid-tile>
+           <mat-grid-tile colspan="3" rowspan="12" align="left">
+             <mat-card class="card_implication">
+
+             <mat-list>
+
+               <mat-list-item>
+             <h3 align="left">Implications</h3>
+               </mat-list-item>
+
+               <mat-card-content>
+               <mat-list-item *ngFor="let tab of tabRolePerso">
+                 <ul>
+                 <li class="content-info-perso">{{tab}}</li>
+                 </ul>
+               </mat-list-item>
+               </mat-card-content>
+             </mat-list>
+             </mat-card>
+           </mat-grid-tile>
+
+           <!--<mat-grid-tile colspan="4" rowspan="1" *ngIf="dateNaissance!==null || dateNaissance!==''">-->
+             <!--<p>{{dateNaissance}}</p>-->
+           <!--</mat-grid-tile>-->
+
+         </mat-grid-list>
+       </mat-card-content>
+     </mat-card>
+    </mat-tab>
+    <mat-tab label="Liste">
+      <app-email [courriel]="_envoieCourriel" *ngIf="etat=== 'courriel'" (envoie) = "envoie($event)"></app-email>
+<app-liste (envoieCourriel) = "envoieCourriel($event)" [etat]="etatAdmin"></app-liste>
+    </mat-tab>
+    <mat-tab label="Rôles">
+        <mat-grid-list cols="3" rowHeight="50px">
+          <mat-grid-tile colspan="1" rowspan="8" *ngFor="let role of tabRole;  let i = index">
+            <mat-card style="min-width: 500px ; min-height: 300px" >
+              <mat-card-header>
+              <h2 style="text-align: left; color: #673AB7">{{role}}</h2>
+              </mat-card-header>
+              <mat-card-content >
+
+
+                  <mat-list *ngFor="let tab of tabRoleCOO[i]">
+                  <mat-list-item>
+                    <p style="font-size: medium ;">{{tab}}</p>
+                  </mat-list-item>
+                  </mat-list>
+
+                    <!--<mat-grid-tile colspan="1" *ngIf=" i>4 && i < 9">-->
+                      <!--<mat-list-item>-->
+                        <!--<p style="font-size: medium ;">{{tab}}</p>-->
+                      <!--</mat-list-item>-->
+                    <!--</mat-grid-tile>-->
+
+
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+    </mat-tab>
+    <mat-tab label="Modifier Info">
+      <app-administrateur [etat]="etatAdmin"></app-administrateur>
+    </mat-tab>
+  </mat-tab-group>

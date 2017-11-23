@@ -12,12 +12,10 @@ export class MakePaymentComponent implements OnInit {
   constructor(private paymentSvc: PaymentService ) {
   }
   ngOnInit() {
-
 console.log('key', environment.stripeKey);
     this.handler = StripeCheckout.configure({
       key: environment.stripeKey,
-      image: 'https://firebasestorage.googleapis.com/v0/b/projetia-8a0f1.appspot.com/o/uploads%2Fadno' +
-      '.svg?alt=media&token=2992a291-6958-4155-9282-6d37084d3b76',
+      image: 'https://firebasestorage.googleapis.com/v0/b/inf1183-a4ebc.appspot.com/o/logoJpg.jpg?alt=media&token=032fd8ed-9c9e-4342-852d-ffdc03f116b4',
       locale: 'auto',
       token: token => {
         this.paymentSvc.processPayment(token, this.amount)

@@ -18,8 +18,8 @@ export class EnrPermissionsComponent implements OnInit {
   _page = '3 / 3';
   uid: string;
   courriel: string;
-  _autorisationsTelephone = ['J\'', 'autorise ', 'que mon numéro de téléphone figure sur la liste des membres.'];
-  _autorisationsNom = ['J\'', 'autorise ', ' que mon nom figure sur la liste des membres.'];
+  _autorisationsTelephone = ['Je ', 'veux ', 'que mon numéro de téléphone figure sur la liste des membres.'];
+  _autorisationsNom = ['Je ', 'veux  ', ' que mon nom figure sur la liste des membres.'];
   constructor(private memb: InfPersoInscMembService , private se: AuthService ) {
 
   }
@@ -55,13 +55,13 @@ trouverUser() {
 
   trouverUid(courriel: string) {
 
-    let trouverUid: Observable<Membre[]>
+    let trouverUid: Observable<Membre[]>;
     trouverUid = this.memb.trouverUid(courriel).snapshotChanges()
       .map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as Membre;
           const id = a.payload.doc.id;
-          this.uid = id
+          this.uid = id;
 
           this.infoMembre = data['data'];
 
@@ -87,17 +87,17 @@ trouverUser() {
   }
   autorisationsTelephone(e) {
     if (e.checked === true) {
-      this._autorisationsTelephone = ['Je ', 'n\'autorise pas ', 'que mon numéro de téléphone figure sur la liste des membres.'];
+      this._autorisationsTelephone = ['Je ', 'ne veux pas ', 'que mon numéro de téléphone figure sur la liste des membres.'];
     }else {
-      this._autorisationsTelephone = ['J\'', 'autorise ', 'que mon numéro de téléphone figure sur la liste des membres.'];
+      this._autorisationsTelephone = ['Je ', 'veux ', 'que mon numéro de téléphone figure sur la liste des membres.'];
     }
     this.autorisationTel = e;
   }
   autorisationsNom(e) {
     if (e.checked === true) {
-      this._autorisationsNom = ['Je ', 'n\'autorise pas ', 'que mon nom figure sur la liste des membres.'];
+      this._autorisationsNom = ['Je ', 'ne veux pas ', 'que mon nom figure sur la liste des membres.'];
     }else {
-      this._autorisationsNom = ['J\'', 'autorise ', ' que mon nom figure sur la liste des membres.'];
+      this._autorisationsNom = ['Je ', 'veux  ', ' que mon nom figure sur la liste des membres.'];
     }
     this.autorisationNom = e;
   }

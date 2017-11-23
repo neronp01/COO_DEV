@@ -36,8 +36,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route): boolean {
-    let url = `/${route.path}`;
-    return this.checkLogin(url,true);
+    const url = `/${route.path}`;
+    return this.checkLogin(url, true);
   }
 
   checkLogin(url: string, a: boolean): boolean {
@@ -47,11 +47,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       this.authService.redirectUrl = url;
 
       // Create a dummy session id
-      let sessionId = 123456789;
+      const sessionId = 123456789;
 
       // Set our navigation extras object
       // that contains our global query params and fragment
-      let navigationExtras: NavigationExtras = {
+      const navigationExtras: NavigationExtras = {
         queryParams: { 'session_id': sessionId },
         fragment: 'anchor'
       };

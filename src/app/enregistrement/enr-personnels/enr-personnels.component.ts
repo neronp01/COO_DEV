@@ -8,6 +8,13 @@ import {MatFormFieldControl} from '@angular/material/form-field';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {Subject} from 'rxjs/Subject';
 import * as moment from 'moment';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 
 
@@ -32,19 +39,14 @@ export class MyTelInput implements MatFormFieldControl<MyTel>, OnDestroy {
 
   @ Input() tabInf: object;
   parts: FormGroup;
-
   stateChanges = new Subject<void>();
   valuesArea= '';
   valuesExchange= '';
   valuesSubscriber= '';
   focused = false;
-
   ngControl = null;
-
   errorState = false;
-
   controlType = 'my-tel-input';
-
   get empty() {
     const n = this.parts.value;
     return !n.area && !n.exchange && !n.subscriber;
@@ -127,7 +129,6 @@ export class MyTelInput implements MatFormFieldControl<MyTel>, OnDestroy {
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
       this.elRef.nativeElement.querySelector('input').focus();
-
     }
   }
   onKeyArea(event: any, exchange: string, subscriber: string) {
@@ -149,13 +150,26 @@ export class MyTelInput implements MatFormFieldControl<MyTel>, OnDestroy {
   selector: 'app-enr-personnels',
   templateUrl: './enr-personnels.component.html',
   styleUrls: ['./enr-personnels.component.css'],
-  providers: [ AuthService , InfPersoInscMembService ]
+  providers: [ AuthService , InfPersoInscMembService ],
+  animations: [
+  trigger('flyInOut', [
+    state('inactive', style({
+      transform: 'translateX(0)',
+    })),
+  state('active', style({
+                          transform: 'translateX(1000)',
+                        })),
+transition('inactive => active',  animate('6000s')),
+  transition('active => inactive', animate('6000s'))
+])
+]
 })
 
 
 
 
 export class EnrPersonnelsComponent implements OnInit {
+  state= 'inactive';
   _abonnementType = 'Abonnement familliale';
   disabled = false;
   _page = '1 / 3';
@@ -163,6 +177,8 @@ export class EnrPersonnelsComponent implements OnInit {
   @ Output() infoMembre = new EventEmitter<Membre>();
   @ Output() infoMembreConjoint = new EventEmitter<Membre>();
   @ Output() membreX: BehaviorSubject<Membre>;
+  @ Input () etat: string; // overviewEdit
+  @ Input () courielAdmin: string;
   placeholder = 'Téléphone';
   selectedValue: string;
   tabInf =  {};
@@ -199,6 +215,7 @@ export class EnrPersonnelsComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.state = 'active';
   }
   createForm() {
     this.myform = new FormGroup({
@@ -248,6 +265,7 @@ export class EnrPersonnelsComponent implements OnInit {
           } )
         this.fuillet.emit('enr-personnels-conj');
       }
+    this.state = 'inactive'
   }
 
   formAssync() {

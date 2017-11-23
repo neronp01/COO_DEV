@@ -172,14 +172,12 @@ export class AuthService {
 
   login():  Observable<boolean> {
     this.token = this.currentUserId;
-    console.log('allo',this.user);
     localStorage.setItem('currentUser', JSON.stringify({ username: this.currentUserName, token: this.token }));
     this.isLoggedIn = this.authenticated;
     return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
   }
 
   logout(): void  {
-
     this.afAuth.auth.signOut();
     // clear token remove user from local storage to log user out
     this.token = null;
